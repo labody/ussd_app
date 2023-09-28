@@ -5,16 +5,15 @@ Through it, the user is able to check their account balance, send money and buy 
 """
 
 balance = 1000.0
-short_code = '*123#'
-while True: 
+while True:     
+    short_code = '*123#'
     user_short_code = input('Enter Short Code: ')
     
     # Ensure user enters appropriate short code
     while (user_short_code != short_code): 
      user_short_code = input("Enter *123# to access menu: ")
 
-    initial_menu_option =  input("Select Option: \n1.Check Balance \n2.Send Money \n3.Buy Airtime") 
-    print(initial_menu_option)
+    initial_menu_option =  input("Select Option: \n1.Check Balance \n2.Send Money \n3.Buy Airtime\n") 
 
     if (initial_menu_option == "1"):
         print(f"Your account balance is {balance} GHS")
@@ -38,9 +37,11 @@ while True:
         while (int(confirmation_option) != 1 and int(confirmation_option) != 2):
           confirmation_option =  input('Invalid Option. Choose 1 or 2: ')       
 
-        if (int(confirmation_option) == 1):
-             print(f"Payment of {amount_to_be_sent}GHS made to {recipient_number}. Your balance is {balance - float(amount_to_be_sent)}")       
-        
+        if (int(confirmation_option) == 1):            
+            balance_after_transaction = balance - float(amount_to_be_sent)
+            balance = balance_after_transaction
+            print(f"Payment of {amount_to_be_sent}GHS made to {recipient_number}. Your balance is {balance}")       
+
         elif (int(confirmation_option) == 2):
             print("Transaction unsuccessful")
   
@@ -54,8 +55,9 @@ while True:
             airtime_confirmation_option = input(f"You are purchashing an airtime of {recharge_amount} for {float(recharge_amount) / 2}GHS. Do you wish to continue? \n1.Yes \n2.No \n")
           
             if(int(airtime_confirmation_option) == 1):
+                balance = balance - float(recharge_amount) / 2
                 print(f"Congratulations. Airtime of {recharge_amount} purchased for an amount of {float(recharge_amount) / 2}")
-           
+                print(f"Your current balance is {balance}")
             elif(int(airtime_confirmation_option)== 2):
                 print("Transaction Unsuccessful. Airtime not purchased.")
         else: 
